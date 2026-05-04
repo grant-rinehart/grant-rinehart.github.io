@@ -298,7 +298,7 @@ function renderReports(){
     <div class="rdesc">${r.desc||'No description.'}</div>
     <div class="rmeta">${r.date||''}${r.tag?' &nbsp;·&nbsp; <span class="tag">'+r.tag+'</span>':''}</div>
     <div class="ract">${r.link?`<button class="rbtn op" onclick="window.open('${r.link}','_blank')">Open doc</button>`:'<span style="font-size:11px;color:#aaa">No doc linked</span>'}
-    <button class="rbtn dl" onclick="del(${r.id})" style="margin-left:auto">Remove</button></div>
+    <button class="rbtn dl" onclick="delAuth(${r.id})" style="margin-left:auto">Remove</button></div>
   </div>`).join('');
   g.innerHTML=main+extras;
 }
@@ -320,6 +320,11 @@ function addReport(){
   renderReports();
 }
 function del(id){reports=reports.filter(r=>r.id!==id);renderReports();}
+function delAuth(id){
+  const pass=prompt('Enter password:');
+  if(pass==='bears888'){del(id);}
+  else{alert('Incorrect password');}
+}
 renderReports();
 </script>
 </body>
