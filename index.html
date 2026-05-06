@@ -284,7 +284,9 @@ new Chart(document.getElementById('c4'),{type:'bar',data:{labels:['Google','Tesl
 // ── GOOGLE DOC LINK IS HARDCODED HERE ──
 const MAIN_DOC_LINK = 'https://docs.google.com/document/d/1nHAyrPBo2hRp4ejURrafcrYSkjxf3gcccvSMf3R7Eto/edit?tab=t.0';
 
-let reports=[],nid=1;
+let reports=[
+  {id:1,title:'Palantir Technologies (PLTR) — Stock Pitch',desc:'AI data analytics company with government and commercial clients. BUY rating, price target $120, +41% upside.',date:'April 2026',tag:'Stock Pitch',link:'https://docs.google.com/document/d/1LqlTK1eDWcn_HsK2HYnPsk_UNS9n6i7L9GEPRQ-6IEg/edit?tab=t.0'}
+],nid=2;
 function renderReports(){
   const g=document.getElementById('rGrid');
   const main=`<div class="rcard" style="border-color:#ccc">
