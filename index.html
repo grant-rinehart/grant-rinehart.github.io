@@ -51,8 +51,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* REPORT CARDS */
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:1.5rem}
-.rcard{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:8px;transition:all .2s}
-.rcard:hover{border-color:#3a3a3a;background:#1a1a1a;transform:translateY(-2px)}
+.rcard{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:8px;transition:all .25s}
+.rcard:hover{border-color:#3b8ade;background:#1a1a1a;transform:translateY(-3px);box-shadow:0 0 18px rgba(59,138,222,0.25),0 4px 20px rgba(0,0,0,0.4)}
 .rcard-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
 .rcard-title{font-size:14px;font-weight:600;color:#fff;line-height:1.4}
 .rtag{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;flex-shrink:0}
@@ -68,7 +68,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* COMPANY CARDS */
 .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
 .cc{background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;cursor:pointer;transition:all .2s;border-top:2px solid transparent}
-.cc:hover{background:#1a1a1a;transform:translateY(-2px)}
+.cc:hover{background:#1a1a1a;transform:translateY(-3px);box-shadow:0 0 18px rgba(59,138,222,0.22),0 4px 20px rgba(0,0,0,0.4);border-color:#3b8ade}
 .cc-tick{font-size:10px;color:#555;margin-bottom:.2rem}
 .cc-name{font-size:15px;font-weight:600;color:#fff;margin-bottom:.2rem}
 .cc-grade{font-size:20px;font-weight:600}
@@ -612,22 +612,25 @@ renderReports();
   if(!c)return;
   var ctx=c.getContext('2d');
   var pts=[];
-  var N=50;
-  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight;}
-  resize();
-  window.addEventListener('resize',resize);
-  for(var i=0;i<N;i++){
-    pts.push({
-      x:Math.random()*c.width,
-      y:Math.random()*c.height,
-      vx:(Math.random()-.5)*.5,
-      vy:(Math.random()-.5)*.5,
-      r:Math.random()*1.5+.5,
-      a:Math.random()*.45+.1
-    });
+  var N=60;
+  function resize(){
+    c.width=c.parentElement.offsetWidth;
+    c.height=c.parentElement.offsetHeight;
+  }
+  function initPts(){
+    pts=[];
+    for(var i=0;i<N;i++){
+      pts.push({
+        x:Math.random()*c.width,
+        y:Math.random()*c.height,
+        vx:(Math.random()-.5)*.5,
+        vy:(Math.random()-.5)*.5,
+        r:Math.random()*1.5+.5,
+        a:Math.random()*.45+.1
+      });
+    }
   }
   function frame(){
-    c.width=c.offsetWidth;c.height=c.offsetHeight;
     ctx.clearRect(0,0,c.width,c.height);
     pts.forEach(function(p){
       p.x+=p.vx;p.y+=p.vy;
@@ -642,11 +645,11 @@ renderReports();
       for(var j=i+1;j<pts.length;j++){
         var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
         var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<100){
+        if(d<110){
           ctx.beginPath();
           ctx.moveTo(pts[i].x,pts[i].y);
           ctx.lineTo(pts[j].x,pts[j].y);
-          ctx.strokeStyle='rgba(59,138,222,'+(1-d/100)*.25+')';
+          ctx.strokeStyle='rgba(59,138,222,'+(1-d/110)*.28+')';
           ctx.lineWidth=.6;
           ctx.stroke();
         }
@@ -654,7 +657,8 @@ renderReports();
     }
     requestAnimationFrame(frame);
   }
-  frame();
+  window.addEventListener('resize',function(){resize();initPts();});
+  setTimeout(function(){resize();initPts();frame();},50);
 })();
 </script>
 </body>
