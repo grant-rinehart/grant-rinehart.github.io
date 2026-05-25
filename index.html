@@ -154,15 +154,58 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .footer-brand{font-size:16px;font-weight:600;color:#fff;letter-spacing:.05em}
 .footer-brand span{color:#555;font-weight:400;font-size:11px;display:block;margin-top:2px}
 
-@media(max-width:600px){
-  .hero-title{font-size:28px}
-  .hero-stats{gap:1.5rem}
-  .hs-val{font-size:22px}
-  .cg{grid-template-columns:repeat(2,1fr)}
+@media(max-width:768px){
+  .hdr{height:90px;padding-right:1rem}
+  .hdr-left img{height:90px!important}
+  .rg{grid-template-columns:1fr}
+  .footer{flex-direction:column;align-items:flex-start;gap:.75rem}
+  .footer>div:last-child{text-align:left}
   .bb{grid-template-columns:1fr}
-  .mg{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:600px){
+  /* Header */
+  .hdr{height:72px;padding-right:.75rem}
+  .hdr-left img{height:72px!important}
   .nav-links{gap:0}
-  .nav-btn{padding:5px 10px;font-size:11px}
+  .nav-btn{padding:6px 11px;font-size:12px;letter-spacing:0}
+
+  /* Hero */
+  .hero{padding:2rem 1rem 1.5rem}
+  .hero-title{font-size:26px}
+  .hero-sub{font-size:12px;margin-bottom:1.25rem}
+  .hero-stats{gap:1rem;flex-wrap:wrap;justify-content:center}
+  .hs-val{font-size:20px}
+  .hs-lbl{font-size:9px}
+
+  /* Sections */
+  .sec-wrap{padding:1rem}
+
+  /* Report cards — single column */
+  .rg{grid-template-columns:1fr}
+  .rcard-ft{flex-direction:column;align-items:flex-start;gap:6px}
+
+  /* Company cards — 2 per row */
+  .cg{grid-template-columns:repeat(2,1fr)}
+
+  /* Metric grid */
+  .mg{grid-template-columns:repeat(2,1fr)}
+
+  /* Bull/bear — stack */
+  .bb{grid-template-columns:1fr}
+
+  /* Comparison table — scrollable */
+  .ctbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .ctbl{min-width:480px}
+
+  /* Company detail */
+  .co-title{font-size:18px}
+  .co-sub{font-size:12px}
+
+  /* Footer */
+  .footer{flex-direction:column;align-items:flex-start;gap:.5rem;padding:1rem 0;margin:1rem 1rem 0}
+  .footer>div:last-child{text-align:left}
+  .footer-brand{font-size:14px}
 }
 </style>
 </head>
@@ -410,7 +453,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="cd" id="cd-comp">
       <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
       <div class="sec-hdr"><div class="sec-title">Side-by-side comparison</div><div class="sec-line"></div></div>
-      <table class="ctbl">
+      <div class="ctbl-wrap"><table class="ctbl">
         <thead><tr><th>Metric</th><th style="color:#5ca3f5">Google</th><th style="color:#e09c38">Tesla</th><th style="color:#4caf6e">Nvidia</th><th>Winner</th></tr></thead>
         <tbody>
           <tr><td>Revenue</td><td class="gcol">$390–405B</td><td class="tcol">$95–105B</td><td class="ncol">$90–120B</td><td><span class="wb" style="background:rgba(59,138,222,.15);color:#5ca3f5">Google</span></td></tr>
@@ -419,7 +462,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <tr><td>EPS</td><td class="gcol">$7.50–8.00</td><td class="tcol">$1.50–2.50</td><td class="ncol">$5–6</td><td><span class="wb" style="background:rgba(59,138,222,.15);color:#5ca3f5">Google</span></td></tr>
           <tr><td>Revenue growth</td><td class="gcol">+10–15%</td><td class="tcol">-3% to +5%</td><td class="ncol">+50%+</td><td><span class="wb">Nvidia</span></td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="lr"><span><span class="ld" style="background:#3b8ade"></span>Google</span><span><span class="ld" style="background:#e09c38"></span>Tesla</span><span><span class="ld" style="background:#4caf6e"></span>Nvidia</span></div>
       <div class="cw" style="height:240px"><canvas id="cc1"></canvas></div>
 
