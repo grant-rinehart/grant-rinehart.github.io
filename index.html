@@ -20,7 +20,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* HEADER */
 .hdr{background:rgba(10,10,10,.97);border-bottom:1px solid #2a2a2a;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;overflow:hidden;height:80px;padding-right:1.5rem}
 .hdr-left{display:flex;align-items:center;height:100%}
-.hdr-logo{height:160px;display:block;margin-left:-2rem;margin-right:-30px;flex-shrink:0}
 .brand-name{font-size:22px;font-weight:600;letter-spacing:.04em;color:#fff;line-height:1}
 .brand-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-top:4px}
 .nav-links{display:flex;gap:2px}
@@ -32,12 +31,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .page{display:none}.page.on{display:block}
 
 /* HERO */
-.hero{padding:4rem 2rem 3rem;text-align:center;border-bottom:1px solid #2a2a2a;background:linear-gradient(180deg,#0f0f0f 0%,#0a0a0a 100%);position:relative}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(59,138,222,.06) 0%,transparent 70%);pointer-events:none}
-.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#3b8ade;margin-bottom:1rem;font-weight:600}
-.hero-title{font-size:40px;font-weight:600;letter-spacing:-.02em;margin-bottom:.75rem;color:#fff}
-.hero-sub{font-size:14px;color:#888;max-width:480px;margin:0 auto 2rem;line-height:1.7}
-.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.hero{padding:4rem 2rem 3rem;text-align:center;border-bottom:1px solid #2a2a2a;background:#0a0a0a;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-10%;right:-10%;bottom:0;background:radial-gradient(ellipse at 50% 20%,rgba(59,138,222,.12) 0%,rgba(59,138,222,.04) 40%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48.5'%3E%3Cpath d='M28 0l24.25 14v28L28 56 3.75 42V14z' fill='none' stroke='rgba(59,138,222,0.12)' stroke-width='0.8'/%3E%3Cpath d='M0-4l24.25 14v28L0 52-24.25 38V10z' fill='none' stroke='rgba(59,138,222,0.08)' stroke-width='0.8'/%3E%3Cpath d='M56-4l24.25 14v28L56 52 31.75 38V10z' fill='none' stroke='rgba(59,138,222,0.08)' stroke-width='0.8'/%3E%3C/svg%3E");background-size:56px 48.5px;pointer-events:none}
+.hero-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(59,138,222,.15) 0%,rgba(59,138,222,.05) 50%,transparent 80%);pointer-events:none;border-radius:50%}
+.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#3b8ade;margin-bottom:1rem;font-weight:600;position:relative;z-index:1}
+.hero-title{font-size:40px;font-weight:600;letter-spacing:-.02em;margin-bottom:.75rem;color:#fff;position:relative;z-index:1}
+.hero-sub{font-size:14px;color:#888;max-width:480px;margin:0 auto 2rem;line-height:1.7;position:relative;z-index:1}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;position:relative;z-index:1}
 .hs-val{font-size:28px;font-weight:600;color:#fff;line-height:1}
 .hs-lbl{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
 
@@ -170,8 +171,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- HEADER -->
 <div class="hdr">
   <div class="hdr-left">
-    <img src="logo.png1" alt="Charge Analytics" class="hdr-logo"/>
-    <div>
+    <div style="padding-left:1.5rem">
       <div class="brand-name">CHARGE ANALYTICS</div>
       <div class="brand-tag">Financial Analysis · Data Driven</div>
     </div>
@@ -186,12 +186,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- ════════════ HOME ════════════ -->
 <div class="page on" id="p-home">
   <div class="hero">
+    <div class="hero-glow"></div>
     <div class="eyebrow">Student-Led Market Analysis</div>
     <div class="hero-title">Charge Analytics</div>
     <div class="hero-sub">Independent equity research covering public markets. Stock pitches, deep dives, and valuation analysis by Grant Rinehart.</div>
     <div class="hero-stats">
-      <div><div class="hs-val">2</div><div class="hs-lbl">Reports Published</div></div>
-      <div><div class="hs-val">4</div><div class="hs-lbl">Companies Covered</div></div>
+      <div><div class="hs-val">3</div><div class="hs-lbl">Reports Published</div></div>
+      <div><div class="hs-val">5</div><div class="hs-lbl">Companies Covered</div></div>
       <div><div class="hs-val">Apr 2026</div><div class="hs-lbl">Latest Report</div></div>
     </div>
   </div>
@@ -206,6 +207,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="rcard-ft">
           <a class="ob" href="https://docs.google.com/document/d/1LqlTK1eDWcn_HsK2HYnPsk_UNS9n6i7L9GEPRQ-6IEg/edit?tab=t.0" target="_blank">Open report →</a>
           <span class="up-tag">Target: $120 · +41%</span>
+        </div>
+      </div>
+      <div class="rcard">
+        <div class="rcard-hdr"><div class="rcard-title">Spotify Technology (SPOT) — Equity Report</div><span class="rtag tag-buy">BUY</span></div>
+        <div class="rcard-desc">World's largest music streaming platform. First profitable year in 2024. 678 million users, margins improving every quarter. Price target $780.</div>
+        <div class="rcard-meta">April 2026 · Equity Report · Consumer Tech</div>
+        <div class="rcard-ft">
+          <a class="ob" href="https://docs.google.com/document/d/1Ou0U8LClKUHa1ZlDuOVRWSpAVVokkB0b/edit" target="_blank">Open report →</a>
+          <span class="up-tag">Target: $780 · +26%</span>
         </div>
       </div>
       <div class="rcard">
@@ -224,6 +234,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="cc" style="border-top-color:#e09c38" onclick="showCompany('tesla')"><div class="cc-tick">TSLA</div><div class="cc-name">Tesla</div><div class="cc-grade" style="color:#e09c38">B-</div><div class="cc-desc">Margin pressure and slowdown</div></div>
       <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('nvidia')"><div class="cc-tick">NVDA</div><div class="cc-name">Nvidia</div><div class="cc-grade" style="color:#4caf6e">A+</div><div class="cc-desc">Explosive AI-driven growth</div></div>
       <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('palantir')"><div class="cc-tick">PLTR</div><div class="cc-name">Palantir</div><div class="cc-grade" style="color:#4caf6e">BUY</div><div class="cc-desc">Target $120 · +41%</div></div>
+      <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('spotify')"><div class="cc-tick">SPOT</div><div class="cc-name">Spotify</div><div class="cc-grade" style="color:#4caf6e">BUY</div><div class="cc-desc">Target $780 · +26%</div></div>
     </div>
 
     <div class="disc"><strong style="color:#888">Disclaimer:</strong> All reports are created by Grant Rinehart, a high school student, for personal and educational purposes only. This is not financial advice. Do not make investment decisions based on this site. Always consult a licensed financial professional before investing.</div>
@@ -243,6 +254,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="sec-hdr"><div class="sec-title">Stock Pitches</div><div class="sec-line"></div></div>
       <div class="cg">
         <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('palantir')"><div class="cc-tick">PLTR · NYSE</div><div class="cc-name">Palantir</div><div class="cc-grade" style="color:#4caf6e">BUY</div><div class="cc-desc">Target $120 · +41% upside</div></div>
+        <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('spotify')"><div class="cc-tick">SPOT · NYSE</div><div class="cc-name">Spotify</div><div class="cc-grade" style="color:#4caf6e">BUY</div><div class="cc-desc">Target $780 · +26% upside</div></div>
       </div>
     </div>
 
@@ -354,6 +366,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
+    <!-- ── SPOTIFY ── -->
+    <div class="cd" id="cd-spotify">
+      <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
+      <div class="cbadge cbn">SPOT — NYSE · Equity Report</div>
+      <div class="co-title" style="color:#4caf6e">Spotify Technology</div>
+      <div class="co-sub">World's largest music streaming platform with 678 million monthly users across 180 countries. For most of its history Spotify was growing fast but losing money. That changed in 2023 when the company finally turned profitable. In 2024 it had its first full year of real profits and margins have been improving every quarter since.</div>
+      <div class="mg">
+        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Rating</div><div class="val" style="color:#4caf6e">BUY</div><div class="sv">Initiated April 2026</div></div>
+        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Price target</div><div class="val">$780</div><div class="sv">vs ~$620 current</div></div>
+        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Upside</div><div class="val" style="color:#4caf6e">+26%</div><div class="sv">12 to 18 months</div></div>
+        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Risk</div><div class="val">Medium</div><div class="sv">Label pricing power</div></div>
+        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Monthly users</div><div class="val">678M</div><div class="sv">+12% YoY</div></div>
+        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Premium subs</div><div class="val">263M</div><div class="sv">Paying users</div></div>
+      </div>
+
+      <div class="sec-hdr" style="margin-top:.5rem"><div class="sec-title">Growth (2021 to 2025)</div><div class="sec-line"></div></div>
+      <div class="lr"><span><span class="ld" style="background:#3b8ade"></span>Monthly users (M)</span><span><span class="ld" style="background:#4caf6e"></span>Premium subs (M)</span></div>
+      <div class="cw" style="height:240px"><canvas id="cs1"></canvas></div>
+
+      <div class="sec-hdr"><div class="sec-title">Gross margin improvement</div><div class="sec-line"></div></div>
+      <div class="cw" style="height:200px"><canvas id="cs2"></canvas></div>
+
+      <div class="bb">
+        <div class="bb-c bull"><h3>Bull case</h3>
+          <div class="si"><span class="dg"></span>Dominant platform with 678 million users</div>
+          <div class="si"><span class="dg"></span>First profitable year ever in 2024</div>
+          <div class="si"><span class="dg"></span>Margins improving every single quarter</div>
+          <div class="si"><span class="dg"></span>Price increases sticking with subscribers</div>
+        </div>
+        <div class="bb-c bear"><h3>Bear case</h3>
+          <div class="ri"><span class="dr"></span>Music labels control royalty costs</div>
+          <div class="ri"><span class="dr"></span>Apple, Google, Amazon all competing</div>
+          <div class="ri"><span class="dr"></span>Stock not cheap at current valuation</div>
+          <div class="ri"><span class="dr"></span>Margin improvement could slow down</div>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <h3>BUY — Price target $780</h3>
+        <p>Spotify spent years losing money while building the world's dominant music platform. Now that the business is profitable and margins are rising, investors are finally seeing what the company is actually worth. With 678 million users, strong brand loyalty, and a clear path to higher margins through podcasts and audiobooks, Spotify is one of the more compelling turnaround stories in consumer tech.</p>
+      </div>
+    </div>
+
     <!-- ── COMPARISON ── -->
     <div class="cd" id="cd-comp">
       <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
@@ -437,6 +492,10 @@ function drawCharts(c){
         new Chart(document.getElementById('cp2'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Profit margin %',data:[-39,-15,10,16,22],backgroundColor:[-39,-15,10,16,22].map(function(v){return v<0?'rgba(224,85,85,.7)':'rgba(76,175,110,.7)'}),borderRadius:3}]},options:pO});
         new Chart(document.getElementById('cp3'),{type:'line',data:{labels:['Q1 23','Q2 23','Q3 23','Q4 23','Q1 24','Q2 24','Q3 24','Q4 24'],datasets:[{label:'US commercial customers',data:[145,198,221,221,262,295,321,382],borderColor:'#3b8ade',backgroundColor:'rgba(59,138,222,.08)',fill:true,tension:.3,pointRadius:3}]},options:cO});
       }
+      if(c==='spotify'){
+        new Chart(document.getElementById('cs1'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Monthly users',data:[406,456,602,678,740],backgroundColor:'rgba(59,138,222,.8)',borderRadius:3},{label:'Premium subs',data:[172,205,236,263,290],backgroundColor:'rgba(76,175,110,.8)',borderRadius:3}]},options:cO});
+        new Chart(document.getElementById('cs2'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Gross margin %',data:[26,25,26,31,33],backgroundColor:['rgba(59,138,222,.6)','rgba(59,138,222,.6)','rgba(59,138,222,.6)','rgba(76,175,110,.7)','rgba(76,175,110,.7)'],borderRadius:3}]},options:pO});
+      }
     }catch(e){console.log('Chart error:',e);}
   },100);
 }
@@ -469,12 +528,14 @@ function showCompany(c){
 // ── GOOGLE DOC LINKS ──
 var MAIN_DOC='https://docs.google.com/document/d/1nHAyrPBo2hRp4ejURrafcrYSkjxf3gcccvSMf3R7Eto/edit?tab=t.0';
 var PLTR_DOC='https://docs.google.com/document/d/1LqlTK1eDWcn_HsK2HYnPsk_UNS9n6i7L9GEPRQ-6IEg/edit?tab=t.0';
+var SPOT_DOC='https://docs.google.com/document/d/1Ou0U8LClKUHa1ZlDuOVRWSpAVVokkB0b/edit';
 
 // ── REPORTS SYSTEM ──
 var reports=[
-  {id:1,title:'Palantir Technologies (PLTR) — Stock Pitch',desc:'AI data analytics company with government and commercial clients. BUY rating, price target $120, +41% upside.',date:'April 2026',tag:'Stock Pitch',link:PLTR_DOC}
+  {id:1,title:'Palantir Technologies (PLTR) — Stock Pitch',desc:'AI data analytics company with government and commercial clients. BUY rating, price target $120, +41% upside.',date:'April 2026',tag:'Stock Pitch',link:PLTR_DOC},
+  {id:2,title:'Spotify Technology (SPOT) — Equity Report',desc:'World\'s largest music streaming platform. BUY rating, price target $780, +26% upside. First profitable year in 2024.',date:'April 2026',tag:'Equity Report',link:SPOT_DOC}
 ];
-var nid=2;
+var nid=3;
 
 function renderReports(){
   var g=document.getElementById('rGrid');
