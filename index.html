@@ -18,7 +18,8 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#f0f0f0}
 
 /* HEADER */
-.hdr{background:linear-gradient(135deg,#000 0%,#060e1f 50%,#0b1a33 100%);border-bottom:2px solid #3b8ade;box-shadow:0 2px 24px rgba(59,138,222,0.35);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;overflow:hidden;height:160px;padding-right:2rem}
+.hdr{background:#000;border-bottom:2px solid #3b8ade;box-shadow:0 2px 24px rgba(59,138,222,0.35);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;overflow:hidden;height:160px;padding-right:2rem}
+.hdr-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
 .hdr-left{display:flex;align-items:center;height:100%}
 .brand-name{font-size:22px;font-weight:600;letter-spacing:.04em;color:#fff;line-height:1}
 .brand-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-top:4px}
@@ -213,6 +214,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <!-- HEADER -->
 <div class="hdr">
+<canvas class="hdr-canvas" id="hdrCanvas"></canvas>
   <div class="hdr-left">
     <img src="charge-logo-full.png" alt="Charge Analytics" style="height:260px;width:auto;display:block;">
   </div>
@@ -603,6 +605,57 @@ function addReport(){
 }
 
 renderReports();
+
+// ── HEADER PARTICLE ANIMATION ──
+(function(){
+  var c=document.getElementById('hdrCanvas');
+  if(!c)return;
+  var ctx=c.getContext('2d');
+  var pts=[];
+  var N=50;
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  for(var i=0;i<N;i++){
+    pts.push({
+      x:Math.random()*c.width,
+      y:Math.random()*c.height,
+      vx:(Math.random()-.5)*.5,
+      vy:(Math.random()-.5)*.5,
+      r:Math.random()*1.5+.5,
+      a:Math.random()*.45+.1
+    });
+  }
+  function frame(){
+    c.width=c.offsetWidth;c.height=c.offsetHeight;
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(function(p){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>c.width)p.vx*=-1;
+      if(p.y<0||p.y>c.height)p.vy*=-1;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,'+p.a+')';
+      ctx.fill();
+    });
+    for(var i=0;i<pts.length;i++){
+      for(var j=i+1;j<pts.length;j++){
+        var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+        var d=Math.sqrt(dx*dx+dy*dy);
+        if(d<100){
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x,pts[i].y);
+          ctx.lineTo(pts[j].x,pts[j].y);
+          ctx.strokeStyle='rgba(59,138,222,'+(1-d/100)*.25+')';
+          ctx.lineWidth=.6;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
 </script>
 </body>
 </html>
