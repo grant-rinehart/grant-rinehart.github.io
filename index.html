@@ -12,203 +12,195 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Charge Analytics — Independent Equity Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#d0d0d0;-webkit-font-smoothing:antialiased}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* HEADER */
-.hdr{background:#000;border-bottom:1px solid rgba(59,138,222,.35);box-shadow:0 1px 12px rgba(59,138,222,.12);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;overflow:hidden;height:64px;padding:0 2rem}
-.hdr-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:.6}
-.hdr-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
-.brand-name{font-size:12px;font-weight:500;letter-spacing:.18em;color:#e8e8e8;line-height:1;text-transform:uppercase}
-.brand-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#3a3a3a;margin-top:3px}
-.nav-links{display:flex;align-items:center;gap:0;position:relative;z-index:1}
-.nav-btn{font-size:12px;padding:4px 0;margin:0 18px;border:none;border-bottom:1px solid transparent;background:transparent;color:#555;cursor:pointer;transition:color .15s,border-color .15s;letter-spacing:.03em;font-weight:400}
-.nav-btn:hover{color:#d0d0d0;border-bottom-color:#3b8ade;background:transparent}
-.nav-btn.active{color:#e8e8e8;border-bottom-color:#3b8ade;font-weight:500;background:transparent}
+:root{
+  --cream:#FAFAF8;
+  --white:#FFFFFF;
+  --ink:#1C1C1C;
+  --navy:#1B3A6B;
+  --mid:#6B6B6B;
+  --rule:#E0DDD5;
+  --card:#E8E5DD;
+  --red:#b83232;
+}
 
-/* PAGES */
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+.hdr{background:var(--white);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;height:64px;padding:0 3rem}
+.hdr-left{display:flex;align-items:center;gap:14px}
+.brand-name{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:500;color:var(--ink);letter-spacing:.01em;line-height:1}
+.brand-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-top:3px;font-weight:300}
+.nav-links{display:flex;align-items:center}
+.nav-btn{font-family:'Inter',sans-serif;font-size:13px;padding:4px 0;margin:0 20px;border:none;background:transparent;color:var(--mid);cursor:pointer;letter-spacing:.04em;font-weight:400;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
+.nav-btn:hover{color:var(--ink);background:transparent}
+.nav-btn.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:500;background:transparent}
+
+/* ── PAGES ── */
 .page{display:none}.page.on{display:block}
 
-/* HERO */
-.hero{padding:5rem 2rem 4rem;text-align:center;border-bottom:1px solid #161616;background:#0a0a0a;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% -10%,rgba(59,138,222,.06) 0%,transparent 55%);pointer-events:none}
-.hero::after{display:none}
+/* ── HERO ── */
+.hero{padding:6rem 3rem 5rem;background:var(--cream);border-bottom:1px solid var(--rule)}
+.hero::before,.hero::after{display:none}
 .hero-glow{display:none}
-.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#3b8ade;margin-bottom:1.25rem;font-weight:400;position:relative;z-index:1}
-.hero-title{font-size:32px;font-weight:300;letter-spacing:.01em;margin-bottom:.9rem;color:#eee;position:relative;z-index:1}
-.hero-sub{font-size:13px;color:#4a4a4a;max-width:440px;margin:0 auto 3rem;line-height:1.8;position:relative;z-index:1}
-.hero-stats{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;position:relative;z-index:1}
-.hs-val{font-size:22px;font-weight:300;color:#ccc;line-height:1}
-.hs-lbl{font-size:9px;color:#3a3a3a;text-transform:uppercase;letter-spacing:.12em;margin-top:6px}
+.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);margin-bottom:1.5rem;font-weight:500}
+.hero-title{font-family:'Playfair Display',Georgia,serif;font-size:52px;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin-bottom:1.5rem;color:var(--ink)}
+.hero-sub{font-size:15px;color:var(--mid);max-width:500px;margin:0 0 4rem;line-height:1.85;font-weight:300}
+.hero-stats{display:flex;gap:5rem;flex-wrap:wrap}
+.hs-val{font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:400;color:var(--ink);line-height:1}
+.hs-lbl{font-size:10px;color:var(--mid);text-transform:uppercase;letter-spacing:.12em;margin-top:8px;font-weight:400}
 
-/* SECTIONS */
-.sec-wrap{padding:2.5rem 2rem}
-.sec-hdr{display:flex;align-items:center;gap:14px;margin-bottom:1.75rem}
-.sec-title{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.18em;color:#3a3a3a;white-space:nowrap}
-.sec-line{flex:1;height:1px;background:#161616}
+/* ── SECTIONS ── */
+.sec-wrap{padding:4rem 3rem}
+.sec-hdr{display:flex;align-items:center;gap:16px;margin-bottom:2.5rem}
+.sec-title{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:var(--mid);white-space:nowrap}
+.sec-line{flex:1;height:1px;background:var(--rule)}
 
-/* REPORT CARDS */
-.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;margin-bottom:2rem;border:1px solid #161616;background:#161616}
-.rcard{background:#0a0a0a;border-radius:0;padding:1.5rem;display:flex;flex-direction:column;gap:10px;transition:background .2s}
-.rcard:hover{background:#0e0e0e;transform:none;box-shadow:none}
+/* ── REPORT CARDS ── */
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-bottom:3rem}
+.rcard{background:var(--white);border:1px solid var(--card);border-left:3px solid var(--navy);padding:2rem;display:flex;flex-direction:column;gap:12px;transition:box-shadow .2s}
+.rcard:hover{box-shadow:0 4px 24px rgba(0,0,0,.07)}
 .rcard-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.rcard-title{font-size:13px;font-weight:500;color:#ddd;line-height:1.5}
-.rtag{font-size:9px;padding:2px 7px;border-radius:2px;font-weight:500;flex-shrink:0;letter-spacing:.06em}
-.tag-buy{background:transparent;color:#3b8ade;border:1px solid rgba(59,138,222,.35)}
-.tag-an{background:transparent;color:#444;border:1px solid #222}
-.rcard-desc{font-size:12px;color:#444;line-height:1.6;flex:1}
-.rcard-meta{font-size:10px;color:#333;letter-spacing:.02em}
-.rcard-ft{display:flex;align-items:center;justify-content:space-between;margin-top:6px;flex-wrap:wrap;gap:6px}
-.ob{font-size:11px;padding:4px 0;border:none;border-bottom:1px solid #2a2a2a;background:transparent;color:#555;cursor:pointer;transition:all .15s;text-decoration:none;display:inline-block;letter-spacing:.02em}
-.ob:hover{border-bottom-color:#3b8ade;color:#3b8ade}
-.up-tag{font-size:11px;color:#3b8ade;font-weight:400;letter-spacing:.02em}
+.rcard-title{font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:400;color:var(--ink);line-height:1.4}
+.rtag{font-size:9px;padding:3px 8px;font-weight:500;flex-shrink:0;letter-spacing:.08em;text-transform:uppercase}
+.tag-buy{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.tag-an{background:transparent;color:var(--mid);border:1px solid var(--card)}
+.rcard-desc{font-size:13px;color:var(--mid);line-height:1.75;flex:1}
+.rcard-meta{font-size:11px;color:#aaa;letter-spacing:.03em}
+.rcard-ft{display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:6px}
+.ob{font-size:12px;padding:4px 0;border:none;border-bottom:1px solid var(--rule);background:transparent;color:var(--mid);cursor:pointer;transition:all .15s;text-decoration:none;display:inline-block;letter-spacing:.02em}
+.ob:hover{border-bottom-color:var(--navy);color:var(--navy)}
+.up-tag{font-size:12px;color:var(--navy);font-weight:500;letter-spacing:.02em}
 
-/* COMPANY CARDS */
-.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:#161616;border:1px solid #161616}
-.cc{background:#0a0a0a;border-radius:0;padding:1.25rem;cursor:pointer;transition:background .2s;border-top:1px solid #161616}
-.cc:hover{background:#0e0e0e;transform:none;box-shadow:none;border-color:#161616}
-.cc-tick{font-size:9px;color:#333;margin-bottom:.3rem;letter-spacing:.04em}
-.cc-name{font-size:14px;font-weight:500;color:#ccc;margin-bottom:.25rem}
-.cc-grade{font-size:18px;font-weight:300}
-.cc-desc{font-size:10px;color:#3a3a3a;margin-top:4px}
+/* ── COMPANY CARDS ── */
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.cc{background:var(--white);border:1px solid var(--card);border-top:2px solid var(--rule);padding:1.5rem;cursor:pointer;transition:box-shadow .2s}
+.cc:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.cc-tick{font-size:10px;color:var(--mid);margin-bottom:.4rem;letter-spacing:.06em;text-transform:uppercase}
+.cc-name{font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:.3rem}
+.cc-grade{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:400}
+.cc-desc{font-size:11px;color:#aaa;margin-top:5px}
 
-/* COMPANY DETAIL PAGES */
-.back-btn{font-size:11px;padding:4px 0;border:none;border-bottom:1px solid #222;background:transparent;color:#555;cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:1.5rem;transition:all .15s;letter-spacing:.02em}
-.back-btn:hover{border-bottom-color:#3b8ade;color:#3b8ade}
+/* ── COMPANY DETAIL ── */
+.back-btn{font-size:12px;padding:4px 0;border:none;border-bottom:1px solid var(--rule);background:transparent;color:var(--mid);cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:2.5rem;transition:all .15s;letter-spacing:.02em}
+.back-btn:hover{border-bottom-color:var(--navy);color:var(--navy)}
 .cd{display:none}.cd.on{display:block}
 .rh.hidden{display:none}
-.cbadge{display:inline-block;font-size:9px;padding:2px 10px;border-radius:2px;margin-bottom:1rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
-.cbg{background:transparent;color:#3b8ade;border:1px solid rgba(59,138,222,.3)}
-.cbt{background:transparent;color:#888;border:1px solid #2a2a2a}
-.cbn{background:transparent;color:#3b8ade;border:1px solid rgba(59,138,222,.3)}
-.co-title{font-size:20px;font-weight:400;color:#e0e0e0;margin-bottom:.4rem}
-.co-sub{font-size:12px;color:#444;margin-bottom:1.5rem;line-height:1.7}
+.cbadge{display:inline-block;font-size:10px;padding:3px 10px;margin-bottom:1.25rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.cbg{background:transparent;color:var(--navy);border:1px solid rgba(27,58,107,.3)}
+.cbt{background:transparent;color:var(--mid);border:1px solid var(--card)}
+.cbn{background:transparent;color:var(--navy);border:1px solid rgba(27,58,107,.3)}
+.co-title{font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:400;color:var(--ink);margin-bottom:.5rem}
+.co-sub{font-size:14px;color:var(--mid);margin-bottom:2.5rem;line-height:1.85;max-width:680px}
 
-/* METRIC CARDS */
-.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;margin-bottom:1.5rem;background:#161616;border:1px solid #161616}
-.mc{background:#0a0a0a;border-radius:0;padding:14px 16px;border-left:2px solid transparent}
-.mc .lbl{font-size:9px;color:#333;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
-.mc .val{font-size:14px;font-weight:400;color:#ddd;line-height:1.2}
-.mc .sv{font-size:10px;color:#444;margin-top:3px}
-.mc .rb{font-size:9px;padding:1px 5px;background:transparent;border:1px solid #1e1e1e;color:#444;display:inline-block;margin-top:3px;border-radius:2px}
+/* ── METRIC CARDS ── */
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;margin-bottom:2.5rem;background:var(--rule);border:1px solid var(--rule)}
+.mc{background:var(--white);padding:18px 20px;border-left:2px solid transparent}
+.mc .lbl{font-size:10px;color:var(--mid);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.mc .val{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:400;color:var(--ink);line-height:1.2}
+.mc .sv{font-size:11px;color:#aaa;margin-top:4px}
+.mc .rb{font-size:9px;padding:1px 5px;background:transparent;border:1px solid var(--card);color:var(--mid);display:inline-block;margin-top:4px}
 
-/* CHARTS */
-.cw{width:100%;margin-bottom:1.5rem;background:#0d0d0d;border-radius:0;padding:1rem;border:1px solid #161616}
-.lr{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px;font-size:10px;color:#444}
-.ld{width:7px;height:7px;border-radius:1px;display:inline-block;margin-right:4px;vertical-align:middle}
+/* ── CHARTS ── */
+.cw{width:100%;margin-bottom:2.5rem;background:var(--white);padding:1.5rem;border:1px solid var(--card)}
+.lr{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:10px;font-size:11px;color:var(--mid)}
+.ld{width:8px;height:8px;display:inline-block;margin-right:5px;vertical-align:middle}
 
-/* ANALYSIS BOXES */
-.ab{background:#0d0d0d;border-radius:0;padding:1rem 1.25rem;margin-bottom:1px;border:1px solid #161616}
-.ab h3{font-size:11px;font-weight:500;color:#aaa;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.1em}
-.si,.ri{font-size:12px;color:#444;padding:4px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.6}
-.dg{width:4px;height:4px;border-radius:50%;background:#3b8ade;margin-top:6px;flex-shrink:0}
-.dr{width:4px;height:4px;border-radius:50%;background:#c0392b;margin-top:6px;flex-shrink:0}
+/* ── ANALYSIS BOXES ── */
+.ab{background:var(--white);padding:1.5rem 1.75rem;margin-bottom:2px;border:1px solid var(--card)}
+.ab h3{font-size:10px;font-weight:500;color:var(--mid);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.12em}
+.si,.ri{font-size:13px;color:var(--mid);padding:5px 0;display:flex;align-items:flex-start;gap:10px;line-height:1.65}
+.dg{width:4px;height:4px;border-radius:50%;background:var(--navy);margin-top:7px;flex-shrink:0}
+.dr{width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0}
 
-/* VERDICT & BULL/BEAR */
-.verdict{border-radius:0;padding:1.25rem 1.5rem;margin-bottom:1.25rem;border-left:2px solid #3b8ade;background:rgba(59,138,222,.04)}
-.verdict h3{font-size:13px;font-weight:500;color:#3b8ade;margin-bottom:.4rem;letter-spacing:.02em}
-.verdict p{font-size:12px;color:#444;line-height:1.7}
-.bb{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:1.5rem;background:#161616;border:1px solid #161616}
-.bb-c{background:#0a0a0a;border-radius:0;padding:1rem 1.25rem}
-.bb-c h3{font-size:10px;font-weight:500;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.1em}
-.bb-c.bull h3{color:#3b8ade}
-.bb-c.bear h3{color:#c0392b}
+/* ── VERDICT & BULL/BEAR ── */
+.verdict{padding:1.75rem 2rem;margin-bottom:2rem;border-left:3px solid var(--navy);background:rgba(27,58,107,.04);border-top:1px solid var(--card);border-right:1px solid var(--card);border-bottom:1px solid var(--card)}
+.verdict h3{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:400;color:var(--navy);margin-bottom:.6rem}
+.verdict p{font-size:14px;color:var(--mid);line-height:1.85}
+.bb{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:2.5rem}
+.bb-c{background:var(--white);border:1px solid var(--card);padding:1.5rem 1.75rem}
+.bb-c h3{font-size:10px;font-weight:500;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.12em}
+.bb-c.bull h3{color:var(--navy)}
+.bb-c.bear h3{color:var(--red)}
 
-/* COMPARISON TABLE */
-.ctbl{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:1.5rem}
-.ctbl th{text-align:left;padding:8px 12px;font-size:9px;font-weight:500;color:#333;border-bottom:1px solid #161616;text-transform:uppercase;letter-spacing:.1em}
-.ctbl td{padding:10px 12px;border-bottom:1px solid #161616;color:#888;font-size:12px}
+/* ── COMPARISON TABLE ── */
+.ctbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:2.5rem}
+.ctbl th{text-align:left;padding:10px 16px;font-size:10px;font-weight:500;color:var(--mid);border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.12em}
+.ctbl td{padding:12px 16px;border-bottom:1px solid var(--rule);color:var(--ink);font-size:13px}
 .ctbl tr:last-child td{border-bottom:none}
-.ctbl tr:hover td{background:#0d0d0d}
-.gcol{color:#3b8ade;font-weight:500}
-.tcol{color:#777;font-weight:500}
-.ncol{color:#3b8ade;font-weight:500}
-.wb{font-size:9px;padding:2px 7px;border-radius:2px;border:1px solid rgba(59,138,222,.3);color:#3b8ade;background:transparent;letter-spacing:.04em}
+.ctbl tr:hover td{background:rgba(0,0,0,.02)}
+.gcol{color:#2563EB;font-weight:500}
+.tcol{color:#D97706;font-weight:500}
+.ncol{color:#059669;font-weight:500}
+.wb{font-size:9px;padding:2px 8px;border:1px solid var(--card);color:var(--mid);background:transparent;letter-spacing:.05em;text-transform:uppercase}
 
-/* GRADE CARDS */
-.gc2{display:flex;align-items:center;gap:1rem;border-radius:0;padding:1rem 1.25rem;margin-bottom:1px;border:1px solid #161616;background:#0a0a0a;transition:background .15s}
-.gc2:hover{background:#0d0d0d}
-.gcirc{width:38px;height:38px;border-radius:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:400;flex-shrink:0;border:1px solid #1e1e1e}
+/* ── GRADE CARDS ── */
+.gc2{display:flex;align-items:center;gap:1.25rem;padding:1.25rem 1.5rem;margin-bottom:2px;border:1px solid var(--card);background:var(--white);transition:background .15s}
+.gc2:hover{background:#F5F4F0}
+.gcirc{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:400;flex-shrink:0;border:1px solid var(--card)}
 
-/* DISCLAIMER */
-.disc{border:1px solid #161616;border-radius:0;padding:12px 16px;font-size:10px;color:#333;line-height:1.7;margin-top:2rem}
+/* ── DISCLAIMER ── */
+.disc{border:1px solid var(--card);padding:16px 20px;font-size:11px;color:var(--mid);line-height:1.85;margin-top:3rem;background:var(--white)}
 
-/* ADD REPORT */
-.add-trigger{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:0;border:1px dashed #1e1e1e;background:transparent;color:#333;font-size:12px;cursor:pointer;width:100%;margin-bottom:1.5rem;letter-spacing:.02em}
-.add-trigger:hover{background:#0d0d0d}
-.add-form{background:#0d0d0d;border-radius:0;border:1px solid #161616;padding:1.25rem;margin-bottom:1.5rem;display:none}
+/* ── ADD REPORT ── */
+.add-trigger{display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px dashed var(--card);background:transparent;color:var(--mid);font-size:13px;cursor:pointer;width:100%;margin-bottom:2rem;letter-spacing:.02em;font-family:'Inter',sans-serif}
+.add-trigger:hover{background:var(--white)}
+.add-form{background:var(--white);border:1px solid var(--card);padding:2rem;margin-bottom:2rem;display:none}
 .add-form.open{display:block}
-.add-form h3{font-size:12px;font-weight:500;margin-bottom:1rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em}
-.add-form label{display:block;font-size:10px;color:#444;margin-bottom:4px;text-transform:uppercase;letter-spacing:.08em}
-.add-form input,.add-form textarea{width:100%;padding:7px 10px;border-radius:0;border:1px solid #1e1e1e;background:#0a0a0a;color:#d0d0d0;font-size:12px;margin-bottom:.8rem;font-family:inherit}
-.add-form textarea{resize:vertical;min-height:65px}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bp{padding:7px 16px;border-radius:0;border:1px solid #2a2a2a;background:transparent;color:#888;font-size:12px;cursor:pointer;transition:all .15s}
-.bp:hover{border-color:#3b8ade;color:#3b8ade}
-.bc{padding:7px 12px;border-radius:0;border:none;background:transparent;color:#333;font-size:12px;cursor:pointer}
+.add-form h3{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:400;margin-bottom:1.5rem;color:var(--ink)}
+.add-form label{display:block;font-size:10px;color:var(--mid);margin-bottom:4px;text-transform:uppercase;letter-spacing:.1em}
+.add-form input,.add-form textarea{width:100%;padding:9px 12px;border:1px solid var(--card);background:var(--cream);color:var(--ink);font-size:13px;margin-bottom:1rem;font-family:'Inter',sans-serif;outline:none}
+.add-form input:focus,.add-form textarea:focus{border-color:var(--navy)}
+.add-form textarea{resize:vertical;min-height:70px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bp{padding:9px 20px;border:1px solid var(--navy);background:transparent;color:var(--navy);font-size:13px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;letter-spacing:.04em}
+.bp:hover{background:var(--navy);color:var(--white)}
+.bc{padding:9px 14px;border:none;background:transparent;color:var(--mid);font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}
 
-/* FOOTER */
-.footer{margin:2rem 2rem 0;padding:1.5rem 0;border-top:1px solid #161616;font-size:10px;color:#333;line-height:1.9;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
-.footer strong{color:#555;font-weight:500}
-.footer-brand{font-size:13px;font-weight:400;color:#888;letter-spacing:.12em;text-transform:uppercase}
-.footer-brand span{color:#2a2a2a;font-weight:400;font-size:9px;display:block;margin-top:3px;letter-spacing:.06em}
+/* ── FOOTER ── */
+.footer{margin:4rem 3rem 2rem;padding:2rem 0;border-top:1px solid var(--rule);font-size:11px;color:var(--mid);line-height:2;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem}
+.footer strong{color:var(--ink);font-weight:500}
+.footer-brand{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:400;color:var(--ink);letter-spacing:.02em}
+.footer-brand span{font-family:'Inter',sans-serif;color:var(--mid);font-weight:300;font-size:10px;display:block;margin-top:4px;letter-spacing:.1em;text-transform:uppercase}
 
+/* ── RESPONSIVE ── */
 @media(max-width:768px){
-  .hdr{height:56px;padding:0 1.25rem}
-  .hdr-left img{height:34px!important}
-  .rg{grid-template-columns:1fr;gap:1px}
-  .footer{flex-direction:column;align-items:flex-start;gap:.75rem}
-  .footer>div:last-child{text-align:left}
-  .bb{grid-template-columns:1fr;gap:1px}
+  .hdr{height:56px;padding:0 1.5rem}
+  .hero{padding:4rem 1.5rem 3rem}
+  .sec-wrap{padding:2.5rem 1.5rem}
+  .rg{grid-template-columns:1fr;gap:16px}
+  .footer{flex-direction:column;align-items:flex-start;gap:1rem;margin:2rem 1.5rem}
+  .bb{grid-template-columns:1fr;gap:12px}
 }
 
 @media(max-width:600px){
-  /* Header */
   .hdr{height:52px;padding:0 1rem}
-  .hdr-left img{height:30px!important}
-  .brand-name{font-size:11px}
+  .hdr-left img{height:26px!important}
+  .brand-name{font-size:15px}
   .brand-tag{display:none}
   .nav-links{gap:0}
-  .nav-btn{margin:0 10px;font-size:11px}
-
-  /* Hero */
-  .hero{padding:2rem 1rem 1.5rem}
-  .hero-title{font-size:26px}
-  .hero-sub{font-size:12px;margin-bottom:1.25rem}
-  .hero-stats{gap:1rem;flex-wrap:wrap;justify-content:center}
-  .hs-val{font-size:20px}
-  .hs-lbl{font-size:9px}
-
-  /* Sections */
-  .sec-wrap{padding:1rem}
-
-  /* Report cards — single column */
+  .nav-btn{margin:0 10px;font-size:12px}
+  .hero{padding:3rem 1rem 2.5rem}
+  .hero-title{font-size:36px}
+  .hero-sub{font-size:14px;margin-bottom:2.5rem}
+  .hero-stats{gap:2rem}
+  .hs-val{font-size:26px}
+  .sec-wrap{padding:2rem 1rem}
   .rg{grid-template-columns:1fr}
   .rcard-ft{flex-direction:column;align-items:flex-start;gap:6px}
-
-  /* Company cards — 2 per row */
   .cg{grid-template-columns:repeat(2,1fr)}
-
-  /* Metric grid */
   .mg{grid-template-columns:repeat(2,1fr)}
-
-  /* Bull/bear — stack */
   .bb{grid-template-columns:1fr}
-
-  /* Comparison table — scrollable */
   .ctbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
   .ctbl{min-width:480px}
-
-  /* Company detail */
-  .co-title{font-size:18px}
-  .co-sub{font-size:12px}
-
-  /* Footer */
-  .footer{flex-direction:column;align-items:flex-start;gap:.5rem;padding:1rem 0;margin:1rem 1rem 0}
-  .footer>div:last-child{text-align:left}
-  .footer-brand{font-size:14px}
+  .co-title{font-size:24px}
+  .footer{flex-direction:column;align-items:flex-start;gap:.5rem;padding:1.5rem 0;margin:2rem 1rem}
+  .footer-brand{font-size:15px}
 }
 </style>
 </head>
@@ -216,9 +208,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <!-- HEADER -->
 <div class="hdr">
-<canvas class="hdr-canvas" id="hdrCanvas"></canvas>
   <div class="hdr-left">
-    <img src="charge-logo-full.png" alt="Charge Analytics" style="height:44px;width:auto;display:block;">
+    <img src="logo.png" alt="Charge Analytics" style="height:38px;width:auto;display:block;mix-blend-mode:multiply;">
     <div>
       <div class="brand-name">Charge Analytics</div>
       <div class="brand-tag">Independent Equity Research</div>
@@ -234,7 +225,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- ════════════ HOME ════════════ -->
 <div class="page on" id="p-home">
   <div class="hero">
-    <div class="hero-glow"></div>
     <div class="eyebrow">Student-Led Market Analysis</div>
     <div class="hero-title">Charge Analytics</div>
     <div class="hero-sub">Independent equity research covering public markets. Stock pitches, deep dives, and valuation analysis by Grant Rinehart.</div>
@@ -266,8 +256,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <span class="up-tag">Target: $780 · +26%</span>
         </div>
       </div>
-      <div class="rcard">
-        <div class="rcard-hdr"><div class="rcard-title">Tech Giants: Google, Tesla & Nvidia</div><span class="rtag tag-an">Analysis</span></div>
+      <div class="rcard" style="border-left-color:var(--rule)">
+        <div class="rcard-hdr"><div class="rcard-title">Tech Giants: Google, Tesla &amp; Nvidia</div><span class="rtag tag-an">Analysis</span></div>
         <div class="rcard-desc">Deep-dive comparing revenue, profit margins, and growth across FY2023 to FY2025 with interactive charts and side-by-side breakdown.</div>
         <div class="rcard-meta">April 2026 · Equity Analysis · Tech</div>
         <div class="rcard-ft">
@@ -277,15 +267,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div class="sec-hdr"><div class="sec-title">Companies Covered</div><div class="sec-line"></div></div>
-    <div class="cg" style="margin-bottom:1.5rem">
-      <div class="cc" style="border-top-color:#3b8ade" onclick="showCompany('google')"><div class="cc-tick">GOOGL</div><div class="cc-name">Google</div><div class="cc-grade" style="color:#3b8ade">A</div><div class="cc-desc">Stable and highly profitable</div></div>
-      <div class="cc" style="border-top-color:#e09c38" onclick="showCompany('tesla')"><div class="cc-tick">TSLA</div><div class="cc-name">Tesla</div><div class="cc-grade" style="color:#e09c38">B-</div><div class="cc-desc">Margin pressure and slowdown</div></div>
-      <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('nvidia')"><div class="cc-tick">NVDA</div><div class="cc-name">Nvidia</div><div class="cc-grade" style="color:#4caf6e">A+</div><div class="cc-desc">Explosive AI-driven growth</div></div>
-      <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('palantir')"><div class="cc-tick">PLTR</div><div class="cc-name">Palantir</div><div class="cc-grade" style="color:#4caf6e">BUY</div><div class="cc-desc">Target $120 · +41%</div></div>
-      <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('spotify')"><div class="cc-tick">SPOT</div><div class="cc-name">Spotify</div><div class="cc-grade" style="color:#4caf6e">BUY</div><div class="cc-desc">Target $780 · +26%</div></div>
+    <div class="cg" style="margin-bottom:3rem">
+      <div class="cc" style="border-top-color:#2563EB" onclick="showCompany('google')"><div class="cc-tick">GOOGL</div><div class="cc-name">Google</div><div class="cc-grade" style="color:#2563EB">A</div><div class="cc-desc">Stable and highly profitable</div></div>
+      <div class="cc" style="border-top-color:#D97706" onclick="showCompany('tesla')"><div class="cc-tick">TSLA</div><div class="cc-name">Tesla</div><div class="cc-grade" style="color:#D97706">B−</div><div class="cc-desc">Margin pressure and slowdown</div></div>
+      <div class="cc" style="border-top-color:#059669" onclick="showCompany('nvidia')"><div class="cc-tick">NVDA</div><div class="cc-name">Nvidia</div><div class="cc-grade" style="color:#059669">A+</div><div class="cc-desc">Explosive AI-driven growth</div></div>
+      <div class="cc" style="border-top-color:var(--navy)" onclick="showCompany('palantir')"><div class="cc-tick">PLTR</div><div class="cc-name">Palantir</div><div class="cc-grade" style="color:var(--navy)">BUY</div><div class="cc-desc">Target $120 · +41%</div></div>
+      <div class="cc" style="border-top-color:var(--navy)" onclick="showCompany('spotify')"><div class="cc-tick">SPOT</div><div class="cc-name">Spotify</div><div class="cc-grade" style="color:var(--navy)">BUY</div><div class="cc-desc">Target $780 · +26%</div></div>
     </div>
 
-    <div class="disc"><strong style="color:#888">Disclaimer:</strong> All reports are created by Grant Rinehart, a high school student, for personal and educational purposes only. This is not financial advice. Do not make investment decisions based on this site. Always consult a licensed financial professional before investing.</div>
+    <div class="disc"><strong>Disclaimer:</strong> All reports are created by Grant Rinehart, a high school student, for personal and educational purposes only. This is not financial advice. Do not make investment decisions based on this site. Always consult a licensed financial professional before investing.</div>
   </div>
 </div>
 
@@ -294,15 +284,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="sec-wrap">
     <div class="rh" id="rh">
       <div class="sec-hdr"><div class="sec-title">Financial analysis on companies</div><div class="sec-line"></div></div>
-      <div class="cg" style="margin-bottom:1.5rem">
-        <div class="cc" style="border-top-color:#3b8ade" onclick="showCompany('google')"><div class="cc-tick">GOOGL · Alphabet</div><div class="cc-name">Google</div><div class="cc-grade" style="color:#3b8ade">A</div><div class="cc-desc">Click to view full analysis</div></div>
-        <div class="cc" style="border-top-color:#e09c38" onclick="showCompany('tesla')"><div class="cc-tick">TSLA · Tesla</div><div class="cc-name">Tesla</div><div class="cc-grade" style="color:#e09c38">B-</div><div class="cc-desc">Click to view full analysis</div></div>
-        <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('nvidia')"><div class="cc-tick">NVDA · Nvidia</div><div class="cc-name">Nvidia</div><div class="cc-grade" style="color:#4caf6e">A+</div><div class="cc-desc">Click to view full analysis</div></div>
+      <div class="cg" style="margin-bottom:3rem">
+        <div class="cc" style="border-top-color:#2563EB" onclick="showCompany('google')"><div class="cc-tick">GOOGL · Alphabet</div><div class="cc-name">Google</div><div class="cc-grade" style="color:#2563EB">A</div><div class="cc-desc">Click to view full analysis</div></div>
+        <div class="cc" style="border-top-color:#D97706" onclick="showCompany('tesla')"><div class="cc-tick">TSLA · Tesla</div><div class="cc-name">Tesla</div><div class="cc-grade" style="color:#D97706">B−</div><div class="cc-desc">Click to view full analysis</div></div>
+        <div class="cc" style="border-top-color:#059669" onclick="showCompany('nvidia')"><div class="cc-tick">NVDA · Nvidia</div><div class="cc-name">Nvidia</div><div class="cc-grade" style="color:#059669">A+</div><div class="cc-desc">Click to view full analysis</div></div>
       </div>
       <div class="sec-hdr"><div class="sec-title">Stock Pitches</div><div class="sec-line"></div></div>
       <div class="cg">
-        <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('palantir')"><div class="cc-tick">PLTR · NYSE</div><div class="cc-name">Palantir</div><div class="cc-grade" style="color:#4caf6e">BUY</div><div class="cc-desc">Target $120 · +41% upside</div></div>
-        <div class="cc" style="border-top-color:#4caf6e" onclick="showCompany('spotify')"><div class="cc-tick">SPOT · NYSE</div><div class="cc-name">Spotify</div><div class="cc-grade" style="color:#4caf6e">BUY</div><div class="cc-desc">Target $780 · +26% upside</div></div>
+        <div class="cc" style="border-top-color:var(--navy)" onclick="showCompany('palantir')"><div class="cc-tick">PLTR · NYSE</div><div class="cc-name">Palantir</div><div class="cc-grade" style="color:var(--navy)">BUY</div><div class="cc-desc">Target $120 · +41% upside</div></div>
+        <div class="cc" style="border-top-color:var(--navy)" onclick="showCompany('spotify')"><div class="cc-tick">SPOT · NYSE</div><div class="cc-name">Spotify</div><div class="cc-grade" style="color:var(--navy)">BUY</div><div class="cc-desc">Target $780 · +26% upside</div></div>
       </div>
     </div>
 
@@ -310,79 +300,79 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="cd" id="cd-google">
       <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
       <div class="cbadge cbg">GOOGL — Alphabet Inc.</div>
-      <div class="co-title" style="color:#5ca3f5">Google</div>
+      <div class="co-title">Google</div>
       <div class="co-sub">Powered by search ads, YouTube, Gmail, and Google Cloud. Dominant in digital advertising with fast-growing Cloud and AI segments. Consistent profit growth with strong margins and a massive cash position.</div>
       <div class="mg">
-        <div class="mc" style="border-left-color:#3b8ade"><div class="lbl">FY2023 revenue</div><div class="val">$307B</div><div class="sv">+9%</div></div>
-        <div class="mc" style="border-left-color:#3b8ade"><div class="lbl">FY2024 revenue</div><div class="val">$350B</div><div class="sv">+14%</div></div>
-        <div class="mc" style="border-left-color:#3b8ade"><div class="lbl">FY2025 revenue</div><div class="val">$390–405B</div><div class="sv">+10–15%</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#3b8ade"><div class="lbl">FY2025 margin</div><div class="val">25–28%</div><div class="sv">vs 27% in '24</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#3b8ade"><div class="lbl">FY2025 EPS</div><div class="val">$7.50–8.00</div><div class="sv">vs $6.80 in '24</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#3b8ade"><div class="lbl">FY2025 net profit</div><div class="val">$100–110B</div><div class="sv">vs $95B in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#2563EB"><div class="lbl">FY2023 revenue</div><div class="val">$307B</div><div class="sv">+9%</div></div>
+        <div class="mc" style="border-left-color:#2563EB"><div class="lbl">FY2024 revenue</div><div class="val">$350B</div><div class="sv">+14%</div></div>
+        <div class="mc" style="border-left-color:#2563EB"><div class="lbl">FY2025 revenue</div><div class="val">$390–405B</div><div class="sv">+10–15%</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#2563EB"><div class="lbl">FY2025 margin</div><div class="val">25–28%</div><div class="sv">vs 27% in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#2563EB"><div class="lbl">FY2025 EPS</div><div class="val">$7.50–8.00</div><div class="sv">vs $6.80 in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#2563EB"><div class="lbl">FY2025 net profit</div><div class="val">$100–110B</div><div class="sv">vs $95B in '24</div><div class="rb">range</div></div>
       </div>
-      <div class="lr"><span><span class="ld" style="background:#3b8ade"></span>Revenue</span><span><span class="ld" style="background:#85B7EB"></span>Net profit</span></div>
+      <div class="lr"><span><span class="ld" style="background:#2563EB"></span>Revenue</span><span><span class="ld" style="background:#93C5FD"></span>Net profit</span></div>
       <div class="cw" style="height:240px"><canvas id="cg1"></canvas></div>
-      <div class="ab" style="border-left:2px solid #3b8ade"><h3>Key strengths</h3><div class="si"><span class="dg"></span>Strong, consistent profit growth year after year</div><div class="si"><span class="dg"></span>AI tools like Gemini expanding product lineup</div><div class="si"><span class="dg"></span>Google Cloud growing fast against AWS and Azure</div></div>
-      <div class="ab" style="border-left:2px solid #e05555"><h3>Key risks</h3><div class="ri"><span class="dr"></span>Competition from AI search tools like ChatGPT</div><div class="ri"><span class="dr"></span>Government antitrust investigations ongoing</div><div class="ri"><span class="dr"></span>Ad revenue vulnerable in an economic downturn</div></div>
+      <div class="ab" style="border-left:2px solid #2563EB"><h3>Key strengths</h3><div class="si"><span class="dg"></span>Strong, consistent profit growth year after year</div><div class="si"><span class="dg"></span>AI tools like Gemini expanding product lineup</div><div class="si"><span class="dg"></span>Google Cloud growing fast against AWS and Azure</div></div>
+      <div class="ab" style="border-left:2px solid var(--red)"><h3>Key risks</h3><div class="ri"><span class="dr"></span>Competition from AI search tools like ChatGPT</div><div class="ri"><span class="dr"></span>Government antitrust investigations ongoing</div><div class="ri"><span class="dr"></span>Ad revenue vulnerable in an economic downturn</div></div>
     </div>
 
     <!-- ── TESLA ── -->
     <div class="cd" id="cd-tesla">
       <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
       <div class="cbadge cbt">TSLA — Tesla Inc.</div>
-      <div class="co-title" style="color:#e09c38">Tesla</div>
+      <div class="co-title">Tesla</div>
       <div class="co-sub">The world's most famous EV brand. Revenue stalled as aggressive price cuts squeezed margins. Competition from Chinese EV makers like BYD is intensifying. Energy storage is a bright spot but not enough to offset auto weakness.</div>
       <div class="mg">
-        <div class="mc" style="border-left-color:#e09c38"><div class="lbl">FY2023 revenue</div><div class="val">$97B</div><div class="sv">+19%</div></div>
-        <div class="mc" style="border-left-color:#e09c38"><div class="lbl">FY2024 revenue</div><div class="val">$98B</div><div class="sv">+1%</div></div>
-        <div class="mc" style="border-left-color:#e09c38"><div class="lbl">FY2025 revenue</div><div class="val">$95–105B</div><div class="sv">-3% to +5%</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#e09c38"><div class="lbl">FY2025 margin</div><div class="val">5–10%</div><div class="sv">vs 9% in '24</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#e09c38"><div class="lbl">FY2025 EPS</div><div class="val">$1.50–2.50</div><div class="sv">vs $2.80 in '24</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#e09c38"><div class="lbl">FY2025 net profit</div><div class="val">$5–10B</div><div class="sv">vs $10B in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#D97706"><div class="lbl">FY2023 revenue</div><div class="val">$97B</div><div class="sv">+19%</div></div>
+        <div class="mc" style="border-left-color:#D97706"><div class="lbl">FY2024 revenue</div><div class="val">$98B</div><div class="sv">+1%</div></div>
+        <div class="mc" style="border-left-color:#D97706"><div class="lbl">FY2025 revenue</div><div class="val">$95–105B</div><div class="sv">-3% to +5%</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#D97706"><div class="lbl">FY2025 margin</div><div class="val">5–10%</div><div class="sv">vs 9% in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#D97706"><div class="lbl">FY2025 EPS</div><div class="val">$1.50–2.50</div><div class="sv">vs $2.80 in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#D97706"><div class="lbl">FY2025 net profit</div><div class="val">$5–10B</div><div class="sv">vs $10B in '24</div><div class="rb">range</div></div>
       </div>
-      <div class="lr"><span><span class="ld" style="background:#e09c38"></span>Revenue</span><span><span class="ld" style="background:#FAC775"></span>Net profit</span></div>
+      <div class="lr"><span><span class="ld" style="background:#D97706"></span>Revenue</span><span><span class="ld" style="background:#FCD34D"></span>Net profit</span></div>
       <div class="cw" style="height:240px"><canvas id="ct1"></canvas></div>
-      <div class="ab" style="border-left:2px solid #e09c38"><h3>Key strengths</h3><div class="si"><span class="dg"></span>Still the #1 electric car brand globally</div><div class="si"><span class="dg"></span>Energy storage (Powerwall/Megapack) growing fast</div><div class="si"><span class="dg"></span>Full Self-Driving software could be huge in the future</div></div>
-      <div class="ab" style="border-left:2px solid #e05555"><h3>Key risks</h3><div class="ri"><span class="dr"></span>Heavy competition from Chinese EVs like BYD</div><div class="ri"><span class="dr"></span>Profit margins shrinking from aggressive price cuts</div><div class="ri"><span class="dr"></span>Over-reliance on Elon Musk adds uncertainty</div></div>
+      <div class="ab" style="border-left:2px solid #D97706"><h3>Key strengths</h3><div class="si"><span class="dg"></span>Still the #1 electric car brand globally</div><div class="si"><span class="dg"></span>Energy storage (Powerwall/Megapack) growing fast</div><div class="si"><span class="dg"></span>Full Self-Driving software could be huge in the future</div></div>
+      <div class="ab" style="border-left:2px solid var(--red)"><h3>Key risks</h3><div class="ri"><span class="dr"></span>Heavy competition from Chinese EVs like BYD</div><div class="ri"><span class="dr"></span>Profit margins shrinking from aggressive price cuts</div><div class="ri"><span class="dr"></span>Over-reliance on Elon Musk adds uncertainty</div></div>
     </div>
 
     <!-- ── NVIDIA ── -->
     <div class="cd" id="cd-nvidia">
       <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
       <div class="cbadge cbn">NVDA — Nvidia Corporation</div>
-      <div class="co-title" style="color:#4caf6e">Nvidia</div>
+      <div class="co-title">Nvidia</div>
       <div class="co-sub">The dominant AI chip maker. Revenue more than doubled in one year driven by unprecedented demand for AI training infrastructure. The new Blackwell chip generation is in massive demand from hyperscalers and enterprise customers.</div>
       <div class="mg">
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">FY2023 revenue</div><div class="val">$27B</div><div class="sv">+20%</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">FY2024 revenue</div><div class="val">$60B</div><div class="sv">+100%+</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">FY2025 revenue</div><div class="val">$90–120B</div><div class="sv">+50%+</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">FY2025 margin</div><div class="val">55–65%</div><div class="sv">vs 55% in '24</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">FY2025 EPS</div><div class="val">$5–6</div><div class="sv">vs $3.20 in '24</div><div class="rb">range</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">FY2025 net profit</div><div class="val">$40–60B</div><div class="sv">vs $20B in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#059669"><div class="lbl">FY2023 revenue</div><div class="val">$27B</div><div class="sv">+20%</div></div>
+        <div class="mc" style="border-left-color:#059669"><div class="lbl">FY2024 revenue</div><div class="val">$60B</div><div class="sv">+100%+</div></div>
+        <div class="mc" style="border-left-color:#059669"><div class="lbl">FY2025 revenue</div><div class="val">$90–120B</div><div class="sv">+50%+</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#059669"><div class="lbl">FY2025 margin</div><div class="val">55–65%</div><div class="sv">vs 55% in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#059669"><div class="lbl">FY2025 EPS</div><div class="val">$5–6</div><div class="sv">vs $3.20 in '24</div><div class="rb">range</div></div>
+        <div class="mc" style="border-left-color:#059669"><div class="lbl">FY2025 net profit</div><div class="val">$40–60B</div><div class="sv">vs $20B in '24</div><div class="rb">range</div></div>
       </div>
-      <div class="lr"><span><span class="ld" style="background:#4caf6e"></span>Revenue</span><span><span class="ld" style="background:#97C459"></span>Net profit</span></div>
+      <div class="lr"><span><span class="ld" style="background:#059669"></span>Revenue</span><span><span class="ld" style="background:#6EE7B7"></span>Net profit</span></div>
       <div class="cw" style="height:240px"><canvas id="cn1"></canvas></div>
-      <div class="ab" style="border-left:2px solid #4caf6e"><h3>Key strengths</h3><div class="si"><span class="dg"></span>Dominant AI chip maker — competitors years behind</div><div class="si"><span class="dg"></span>Revenue growth almost unprecedented in business history</div><div class="si"><span class="dg"></span>New Blackwell chip generation in massive demand</div></div>
-      <div class="ab" style="border-left:2px solid #e05555"><h3>Key risks</h3><div class="ri"><span class="dr"></span>US restrictions on chip exports to China</div><div class="ri"><span class="dr"></span>AMD and Intel both trying to close the gap</div><div class="ri"><span class="dr"></span>AI spending boom could eventually slow down</div></div>
+      <div class="ab" style="border-left:2px solid #059669"><h3>Key strengths</h3><div class="si"><span class="dg"></span>Dominant AI chip maker — competitors years behind</div><div class="si"><span class="dg"></span>Revenue growth almost unprecedented in business history</div><div class="si"><span class="dg"></span>New Blackwell chip generation in massive demand</div></div>
+      <div class="ab" style="border-left:2px solid var(--red)"><h3>Key risks</h3><div class="ri"><span class="dr"></span>US restrictions on chip exports to China</div><div class="ri"><span class="dr"></span>AMD and Intel both trying to close the gap</div><div class="ri"><span class="dr"></span>AI spending boom could eventually slow down</div></div>
     </div>
 
     <!-- ── PALANTIR ── -->
     <div class="cd" id="cd-palantir">
       <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
       <div class="cbadge cbn">PLTR — NYSE · Stock Pitch</div>
-      <div class="co-title" style="color:#4caf6e">Palantir Technologies</div>
+      <div class="co-title">Palantir Technologies</div>
       <div class="co-sub">AI data analytics company with government and commercial clients. Founded in 2003, went public in 2020. Launched AIP in 2023 which connects AI models directly to a company's private data. The only profitable AI software company right now with $4.6B in cash and zero debt.</div>
       <div class="mg">
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Rating</div><div class="val" style="color:#4caf6e">BUY</div><div class="sv">Initiated April 2026</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Price target</div><div class="val">$120</div><div class="sv">vs ~$85 current</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Upside</div><div class="val" style="color:#4caf6e">+41%</div><div class="sv">12 to 18 months</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Risk</div><div class="val">Medium</div><div class="sv">High valuation</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Revenue (2024)</div><div class="val">$2.87B</div><div class="sv">+29% YoY</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Cash position</div><div class="val">$4.6B</div><div class="sv">Zero debt</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Rating</div><div class="val" style="color:var(--navy)">BUY</div><div class="sv">Initiated April 2026</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Price target</div><div class="val">$120</div><div class="sv">vs ~$85 current</div></div>
+        <div class="mc" style="border-left-color:#059669"><div class="lbl">Upside</div><div class="val" style="color:#059669">+41%</div><div class="sv">12 to 18 months</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Risk</div><div class="val">Medium</div><div class="sv">High valuation</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Revenue (2024)</div><div class="val">$2.87B</div><div class="sv">+29% YoY</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Cash position</div><div class="val">$4.6B</div><div class="sv">Zero debt</div></div>
       </div>
 
       <div class="sec-hdr" style="margin-top:.5rem"><div class="sec-title">Revenue growth ($M)</div><div class="sec-line"></div></div>
-      <div class="lr"><span><span class="ld" style="background:#3b8ade"></span>Total revenue</span><span><span class="ld" style="background:#4caf6e"></span>US commercial</span></div>
+      <div class="lr"><span><span class="ld" style="background:#2563EB"></span>Total revenue</span><span><span class="ld" style="background:#059669"></span>US commercial</span></div>
       <div class="cw" style="height:240px"><canvas id="cp1"></canvas></div>
 
       <div class="sec-hdr"><div class="sec-title">Profit margin turnaround</div><div class="sec-line"></div></div>
@@ -395,7 +385,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="bb-c bull"><h3>Bull case</h3>
           <div class="si"><span class="dg"></span>Only profitable AI software company</div>
           <div class="si"><span class="dg"></span>US commercial revenue growing 54%</div>
-          <div class="si"><span class="dg"></span>Added to S&P 500 in 2024</div>
+          <div class="si"><span class="dg"></span>Added to S&amp;P 500 in 2024</div>
           <div class="si"><span class="dg"></span>$4.6B cash, zero debt</div>
           <div class="si"><span class="dg"></span>Government contracts locked in for years</div>
         </div>
@@ -418,19 +408,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="cd" id="cd-spotify">
       <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
       <div class="cbadge cbn">SPOT — NYSE · Equity Report</div>
-      <div class="co-title" style="color:#4caf6e">Spotify Technology</div>
+      <div class="co-title">Spotify Technology</div>
       <div class="co-sub">World's largest music streaming platform with 678 million monthly users across 180 countries. For most of its history Spotify was growing fast but losing money. That changed in 2023 when the company finally turned profitable. In 2024 it had its first full year of real profits and margins have been improving every quarter since.</div>
       <div class="mg">
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Rating</div><div class="val" style="color:#4caf6e">BUY</div><div class="sv">Initiated April 2026</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Price target</div><div class="val">$780</div><div class="sv">vs ~$620 current</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Upside</div><div class="val" style="color:#4caf6e">+26%</div><div class="sv">12 to 18 months</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Risk</div><div class="val">Medium</div><div class="sv">Label pricing power</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Monthly users</div><div class="val">678M</div><div class="sv">+12% YoY</div></div>
-        <div class="mc" style="border-left-color:#4caf6e"><div class="lbl">Premium subs</div><div class="val">263M</div><div class="sv">Paying users</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Rating</div><div class="val" style="color:var(--navy)">BUY</div><div class="sv">Initiated April 2026</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Price target</div><div class="val">$780</div><div class="sv">vs ~$620 current</div></div>
+        <div class="mc" style="border-left-color:#059669"><div class="lbl">Upside</div><div class="val" style="color:#059669">+26%</div><div class="sv">12 to 18 months</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Risk</div><div class="val">Medium</div><div class="sv">Label pricing power</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Monthly users</div><div class="val">678M</div><div class="sv">+12% YoY</div></div>
+        <div class="mc" style="border-left-color:var(--navy)"><div class="lbl">Premium subs</div><div class="val">263M</div><div class="sv">Paying users</div></div>
       </div>
 
       <div class="sec-hdr" style="margin-top:.5rem"><div class="sec-title">Growth (2021 to 2025)</div><div class="sec-line"></div></div>
-      <div class="lr"><span><span class="ld" style="background:#3b8ade"></span>Monthly users (M)</span><span><span class="ld" style="background:#4caf6e"></span>Premium subs (M)</span></div>
+      <div class="lr"><span><span class="ld" style="background:#2563EB"></span>Monthly users (M)</span><span><span class="ld" style="background:#059669"></span>Premium subs (M)</span></div>
       <div class="cw" style="height:240px"><canvas id="cs1"></canvas></div>
 
       <div class="sec-hdr"><div class="sec-title">Gross margin improvement</div><div class="sec-line"></div></div>
@@ -462,22 +452,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="back-btn" onclick="showCompany(null)">← Back to research</button>
       <div class="sec-hdr"><div class="sec-title">Side-by-side comparison</div><div class="sec-line"></div></div>
       <div class="ctbl-wrap"><table class="ctbl">
-        <thead><tr><th>Metric</th><th style="color:#5ca3f5">Google</th><th style="color:#e09c38">Tesla</th><th style="color:#4caf6e">Nvidia</th><th>Winner</th></tr></thead>
+        <thead><tr><th>Metric</th><th style="color:#2563EB">Google</th><th style="color:#D97706">Tesla</th><th style="color:#059669">Nvidia</th><th>Winner</th></tr></thead>
         <tbody>
-          <tr><td>Revenue</td><td class="gcol">$390–405B</td><td class="tcol">$95–105B</td><td class="ncol">$90–120B</td><td><span class="wb" style="background:rgba(59,138,222,.15);color:#5ca3f5">Google</span></td></tr>
-          <tr><td>Net profit</td><td class="gcol">$100–110B</td><td class="tcol">$5–10B</td><td class="ncol">$40–60B</td><td><span class="wb" style="background:rgba(59,138,222,.15);color:#5ca3f5">Google</span></td></tr>
+          <tr><td>Revenue</td><td class="gcol">$390–405B</td><td class="tcol">$95–105B</td><td class="ncol">$90–120B</td><td><span class="wb">Google</span></td></tr>
+          <tr><td>Net profit</td><td class="gcol">$100–110B</td><td class="tcol">$5–10B</td><td class="ncol">$40–60B</td><td><span class="wb">Google</span></td></tr>
           <tr><td>Profit margin</td><td class="gcol">25–28%</td><td class="tcol">5–10%</td><td class="ncol">55–65%</td><td><span class="wb">Nvidia</span></td></tr>
-          <tr><td>EPS</td><td class="gcol">$7.50–8.00</td><td class="tcol">$1.50–2.50</td><td class="ncol">$5–6</td><td><span class="wb" style="background:rgba(59,138,222,.15);color:#5ca3f5">Google</span></td></tr>
+          <tr><td>EPS</td><td class="gcol">$7.50–8.00</td><td class="tcol">$1.50–2.50</td><td class="ncol">$5–6</td><td><span class="wb">Google</span></td></tr>
           <tr><td>Revenue growth</td><td class="gcol">+10–15%</td><td class="tcol">-3% to +5%</td><td class="ncol">+50%+</td><td><span class="wb">Nvidia</span></td></tr>
         </tbody>
       </table></div>
-      <div class="lr"><span><span class="ld" style="background:#3b8ade"></span>Google</span><span><span class="ld" style="background:#e09c38"></span>Tesla</span><span><span class="ld" style="background:#4caf6e"></span>Nvidia</span></div>
+      <div class="lr"><span><span class="ld" style="background:#2563EB"></span>Google</span><span><span class="ld" style="background:#D97706"></span>Tesla</span><span><span class="ld" style="background:#059669"></span>Nvidia</span></div>
       <div class="cw" style="height:240px"><canvas id="cc1"></canvas></div>
 
       <div class="sec-hdr"><div class="sec-title">Final report card</div><div class="sec-line"></div></div>
-      <div class="gc2"><div class="gcirc" style="background:rgba(76,175,110,.15);color:#4caf6e">A+</div><div><div style="font-size:14px;font-weight:600;color:#4caf6e">Nvidia</div><div style="font-size:12px;color:#888;margin-top:2px">Explosive AI-driven growth, enormous margins, dominant chip market position.</div></div></div>
-      <div class="gc2"><div class="gcirc" style="background:rgba(59,138,222,.15);color:#5ca3f5">A</div><div><div style="font-size:14px;font-weight:600;color:#5ca3f5">Google</div><div style="font-size:12px;color:#888;margin-top:2px">Stable, highly profitable, consistent growth and strong AI investment.</div></div></div>
-      <div class="gc2"><div class="gcirc" style="background:rgba(224,156,56,.15);color:#e09c38">B-</div><div><div style="font-size:14px;font-weight:600;color:#e09c38">Tesla</div><div style="font-size:12px;color:#888;margin-top:2px">Slowing growth, declining margins, heavy competitive pressure.</div></div></div>
+      <div class="gc2"><div class="gcirc" style="color:#059669">A+</div><div><div style="font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:400;color:var(--ink)">Nvidia</div><div style="font-size:13px;color:var(--mid);margin-top:3px">Explosive AI-driven growth, enormous margins, dominant chip market position.</div></div></div>
+      <div class="gc2"><div class="gcirc" style="color:#2563EB">A</div><div><div style="font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:400;color:var(--ink)">Google</div><div style="font-size:13px;color:var(--mid);margin-top:3px">Stable, highly profitable, consistent growth and strong AI investment.</div></div></div>
+      <div class="gc2"><div class="gcirc" style="color:#D97706">B−</div><div><div style="font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:400;color:var(--ink)">Tesla</div><div style="font-size:13px;color:var(--mid);margin-top:3px">Slowing growth, declining margins, heavy competitive pressure.</div></div></div>
     </div>
   </div>
 </div>
@@ -508,7 +498,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- FOOTER -->
 <div class="footer">
   <div>
-    <div class="footer-brand">CHARGE ANALYTICS<span>chargeanalytics.org</span></div>
+    <div class="footer-brand">Charge Analytics<span>chargeanalytics.org</span></div>
   </div>
   <div style="text-align:right">
     <strong>Grant Rinehart</strong> · Student · Personal Research Project · April 2026<br>
@@ -518,8 +508,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <script>
-// ── CHART OPTIONS ──
-function mkOpts(cb){return{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{font:{size:10},boxWidth:8,boxHeight:8,color:'#888'}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:10},color:'#666'}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:10},color:'#666',callback:cb}}}};}
+// ── CHART OPTIONS (light theme) ──
+function mkOpts(cb){
+  return{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{legend:{display:true,labels:{font:{size:11,family:"Inter, sans-serif"},boxWidth:8,boxHeight:8,color:'#6B6B6B'}}},
+    scales:{
+      x:{grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{size:10,family:"Inter, sans-serif"},color:'#999'}},
+      y:{grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{size:10,family:"Inter, sans-serif"},color:'#999',callback:cb}}
+    }
+  };
+}
 const bO=mkOpts(v=>'$'+v+'B');
 const pO=mkOpts(v=>v+'%');
 const mO=mkOpts(v=>'$'+v+'M');
@@ -531,18 +531,18 @@ function drawCharts(c){
   if(drawn[c])return;drawn[c]=true;
   setTimeout(function(){
     try{
-      if(c==='google'){new Chart(document.getElementById('cg1'),{type:'line',data:{labels:['FY2023','FY2024','FY2025'],datasets:[{label:'Revenue',data:[307,350,397],borderColor:'#3b8ade',backgroundColor:'rgba(59,138,222,.08)',fill:true,tension:.3,pointRadius:3},{label:'Net Profit',data:[74,95,105],borderColor:'#85B7EB',backgroundColor:'rgba(133,183,235,.04)',fill:true,tension:.3,pointRadius:3,borderDash:[4,3]}]},options:bO});}
-      if(c==='tesla'){new Chart(document.getElementById('ct1'),{type:'line',data:{labels:['FY2023','FY2024','FY2025'],datasets:[{label:'Revenue',data:[97,98,100],borderColor:'#e09c38',backgroundColor:'rgba(224,156,56,.08)',fill:true,tension:.3,pointRadius:3},{label:'Net Profit',data:[15,10,7.5],borderColor:'#FAC775',backgroundColor:'rgba(250,199,117,.04)',fill:true,tension:.3,pointRadius:3,borderDash:[4,3]}]},options:bO});}
-      if(c==='nvidia'){new Chart(document.getElementById('cn1'),{type:'line',data:{labels:['FY2023','FY2024','FY2025'],datasets:[{label:'Revenue',data:[27,60,105],borderColor:'#4caf6e',backgroundColor:'rgba(76,175,110,.08)',fill:true,tension:.3,pointRadius:3},{label:'Net Profit',data:[4.5,20,50],borderColor:'#97C459',backgroundColor:'rgba(151,196,89,.04)',fill:true,tension:.3,pointRadius:3,borderDash:[4,3]}]},options:bO});}
-      if(c==='comp'){new Chart(document.getElementById('cc1'),{type:'bar',data:{labels:['Google','Tesla','Nvidia'],datasets:[{label:'Profit margin %',data:[26.5,7.5,60],backgroundColor:['#3b8ade','#e09c38','#4caf6e'],borderRadius:3},{label:'Revenue growth %',data:[12.5,1,50],backgroundColor:['#85B7EB','#FAC775','#97C459'],borderRadius:3}]},options:{...bO,scales:{...bO.scales,y:{...bO.scales.y,ticks:{font:{size:10},color:'#666',callback:v=>v+'%'}}}}});}
+      if(c==='google'){new Chart(document.getElementById('cg1'),{type:'line',data:{labels:['FY2023','FY2024','FY2025'],datasets:[{label:'Revenue',data:[307,350,397],borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,.07)',fill:true,tension:.3,pointRadius:3},{label:'Net Profit',data:[74,95,105],borderColor:'#93C5FD',backgroundColor:'rgba(147,197,253,.04)',fill:true,tension:.3,pointRadius:3,borderDash:[4,3]}]},options:bO});}
+      if(c==='tesla'){new Chart(document.getElementById('ct1'),{type:'line',data:{labels:['FY2023','FY2024','FY2025'],datasets:[{label:'Revenue',data:[97,98,100],borderColor:'#D97706',backgroundColor:'rgba(217,119,6,.07)',fill:true,tension:.3,pointRadius:3},{label:'Net Profit',data:[15,10,7.5],borderColor:'#FCD34D',backgroundColor:'rgba(252,211,77,.04)',fill:true,tension:.3,pointRadius:3,borderDash:[4,3]}]},options:bO});}
+      if(c==='nvidia'){new Chart(document.getElementById('cn1'),{type:'line',data:{labels:['FY2023','FY2024','FY2025'],datasets:[{label:'Revenue',data:[27,60,105],borderColor:'#059669',backgroundColor:'rgba(5,150,105,.07)',fill:true,tension:.3,pointRadius:3},{label:'Net Profit',data:[4.5,20,50],borderColor:'#6EE7B7',backgroundColor:'rgba(110,231,183,.04)',fill:true,tension:.3,pointRadius:3,borderDash:[4,3]}]},options:bO});}
+      if(c==='comp'){new Chart(document.getElementById('cc1'),{type:'bar',data:{labels:['Google','Tesla','Nvidia'],datasets:[{label:'Profit margin %',data:[26.5,7.5,60],backgroundColor:['#2563EB','#D97706','#059669'],borderRadius:2},{label:'Revenue growth %',data:[12.5,1,50],backgroundColor:['#93C5FD','#FCD34D','#6EE7B7'],borderRadius:2}]},options:{...bO,scales:{...bO.scales,y:{...bO.scales.y,ticks:{font:{size:10},color:'#999',callback:v=>v+'%'}}}}});}
       if(c==='palantir'){
-        new Chart(document.getElementById('cp1'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Total revenue',data:[1541,1906,2229,2865,3700],backgroundColor:'rgba(59,138,222,.8)',borderRadius:3},{label:'US commercial',data:[322,505,860,1145,1600],backgroundColor:'rgba(76,175,110,.8)',borderRadius:3}]},options:mO});
-        new Chart(document.getElementById('cp2'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Profit margin %',data:[-39,-15,10,16,22],backgroundColor:[-39,-15,10,16,22].map(function(v){return v<0?'rgba(224,85,85,.7)':'rgba(76,175,110,.7)'}),borderRadius:3}]},options:pO});
-        new Chart(document.getElementById('cp3'),{type:'line',data:{labels:['Q1 23','Q2 23','Q3 23','Q4 23','Q1 24','Q2 24','Q3 24','Q4 24'],datasets:[{label:'US commercial customers',data:[145,198,221,221,262,295,321,382],borderColor:'#3b8ade',backgroundColor:'rgba(59,138,222,.08)',fill:true,tension:.3,pointRadius:3}]},options:cO});
+        new Chart(document.getElementById('cp1'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Total revenue',data:[1541,1906,2229,2865,3700],backgroundColor:'rgba(37,99,235,.75)',borderRadius:2},{label:'US commercial',data:[322,505,860,1145,1600],backgroundColor:'rgba(5,150,105,.75)',borderRadius:2}]},options:mO});
+        new Chart(document.getElementById('cp2'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Profit margin %',data:[-39,-15,10,16,22],backgroundColor:[-39,-15,10,16,22].map(function(v){return v<0?'rgba(184,50,50,.65)':'rgba(5,150,105,.7)'}),borderRadius:2}]},options:pO});
+        new Chart(document.getElementById('cp3'),{type:'line',data:{labels:['Q1 23','Q2 23','Q3 23','Q4 23','Q1 24','Q2 24','Q3 24','Q4 24'],datasets:[{label:'US commercial customers',data:[145,198,221,221,262,295,321,382],borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,.07)',fill:true,tension:.3,pointRadius:3}]},options:cO});
       }
       if(c==='spotify'){
-        new Chart(document.getElementById('cs1'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Monthly users',data:[406,456,602,678,740],backgroundColor:'rgba(59,138,222,.8)',borderRadius:3},{label:'Premium subs',data:[172,205,236,263,290],backgroundColor:'rgba(76,175,110,.8)',borderRadius:3}]},options:cO});
-        new Chart(document.getElementById('cs2'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Gross margin %',data:[26,25,26,31,33],backgroundColor:['rgba(59,138,222,.6)','rgba(59,138,222,.6)','rgba(59,138,222,.6)','rgba(76,175,110,.7)','rgba(76,175,110,.7)'],borderRadius:3}]},options:pO});
+        new Chart(document.getElementById('cs1'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Monthly users',data:[406,456,602,678,740],backgroundColor:'rgba(37,99,235,.75)',borderRadius:2},{label:'Premium subs',data:[172,205,236,263,290],backgroundColor:'rgba(5,150,105,.75)',borderRadius:2}]},options:cO});
+        new Chart(document.getElementById('cs2'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025 est.'],datasets:[{label:'Gross margin %',data:[26,25,26,31,33],backgroundColor:['rgba(37,99,235,.55)','rgba(37,99,235,.55)','rgba(37,99,235,.55)','rgba(5,150,105,.7)','rgba(5,150,105,.7)'],borderRadius:2}]},options:pO});
       }
     }catch(e){console.log('Chart error:',e);}
   },100);
@@ -587,9 +587,9 @@ var nid=3;
 
 function renderReports(){
   var g=document.getElementById('rGrid');
-  var main='<div class="rcard"><div class="rcard-hdr"><div class="rcard-title">Tech Giants: Google, Tesla & Nvidia</div><span class="rtag tag-an">Analysis</span></div><div class="rcard-desc">A deep-dive comparing revenue, profit margins, and growth trajectories across FY2023 to FY2025.</div><div class="rcard-meta">April 2026 · Equity Analysis</div><div class="rcard-ft"><a class="ob" href="'+MAIN_DOC+'" target="_blank">Open report →</a></div></div>';
+  var main='<div class="rcard" style="border-left-color:var(--rule)"><div class="rcard-hdr"><div class="rcard-title">Tech Giants: Google, Tesla &amp; Nvidia</div><span class="rtag tag-an">Analysis</span></div><div class="rcard-desc">A deep-dive comparing revenue, profit margins, and growth trajectories across FY2023 to FY2025.</div><div class="rcard-meta">April 2026 · Equity Analysis</div><div class="rcard-ft"><a class="ob" href="'+MAIN_DOC+'" target="_blank">Open report →</a></div></div>';
   var extras=reports.map(function(r){
-    return '<div class="rcard"><div class="rcard-hdr"><div class="rcard-title">'+r.title+'</div>'+(r.tag==='Stock Pitch'?'<span class="rtag tag-buy">BUY</span>':'<span class="rtag tag-an">'+r.tag+'</span>')+'</div><div class="rcard-desc">'+(r.desc||'No description.')+'</div><div class="rcard-meta">'+(r.date||'')+' · '+(r.tag||'')+'</div><div class="rcard-ft">'+(r.link?'<a class="ob" href="'+r.link+'" target="_blank">Open report →</a>':'<span style="font-size:11px;color:#555">No doc linked</span>')+'</div></div>';
+    return '<div class="rcard"><div class="rcard-hdr"><div class="rcard-title">'+r.title+'</div>'+(r.tag==='Stock Pitch'?'<span class="rtag tag-buy">BUY</span>':'<span class="rtag tag-an">'+r.tag+'</span>')+'</div><div class="rcard-desc">'+(r.desc||'No description.')+'</div><div class="rcard-meta">'+(r.date||'')+' · '+(r.tag||'')+'</div><div class="rcard-ft">'+(r.link?'<a class="ob" href="'+r.link+'" target="_blank">Open report →</a>':'<span style="font-size:11px;color:#aaa">No doc linked</span>')+'</div></div>';
   }).join('');
   g.innerHTML=main+extras;
 }
@@ -602,7 +602,7 @@ function toggleForm(){
 
 function addReport(){
   var t=document.getElementById('rTitle').value.trim();
-  if(!t){document.getElementById('rTitle').style.borderColor='#e05555';return;}
+  if(!t){document.getElementById('rTitle').style.borderColor='#b83232';return;}
   document.getElementById('rTitle').style.borderColor='';
   reports.unshift({id:nid++,title:t,desc:document.getElementById('rDesc').value.trim(),date:document.getElementById('rDate').value.trim(),tag:document.getElementById('rTag').value.trim(),link:document.getElementById('rLink').value.trim()});
   ['rTitle','rDesc','rDate','rTag','rLink'].forEach(function(i){document.getElementById(i).value='';});
@@ -611,61 +611,6 @@ function addReport(){
 }
 
 renderReports();
-
-// ── HEADER PARTICLE ANIMATION ──
-(function(){
-  var c=document.getElementById('hdrCanvas');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var pts=[];
-  var N=60;
-  function resize(){
-    c.width=c.parentElement.offsetWidth;
-    c.height=c.parentElement.offsetHeight;
-  }
-  function initPts(){
-    pts=[];
-    for(var i=0;i<N;i++){
-      pts.push({
-        x:Math.random()*c.width,
-        y:Math.random()*c.height,
-        vx:(Math.random()-.5)*.5,
-        vy:(Math.random()-.5)*.5,
-        r:Math.random()*1.5+.5,
-        a:Math.random()*.45+.1
-      });
-    }
-  }
-  function frame(){
-    ctx.clearRect(0,0,c.width,c.height);
-    pts.forEach(function(p){
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>c.width)p.vx*=-1;
-      if(p.y<0||p.y>c.height)p.vy*=-1;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(255,255,255,'+p.a+')';
-      ctx.fill();
-    });
-    for(var i=0;i<pts.length;i++){
-      for(var j=i+1;j<pts.length;j++){
-        var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<110){
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x,pts[i].y);
-          ctx.lineTo(pts[j].x,pts[j].y);
-          ctx.strokeStyle='rgba(59,138,222,'+(1-d/110)*.28+')';
-          ctx.lineWidth=.6;
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(frame);
-  }
-  window.addEventListener('resize',function(){resize();initPts();});
-  setTimeout(function(){resize();initPts();frame();},50);
-})();
 </script>
 </body>
 </html>
