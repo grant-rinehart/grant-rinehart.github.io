@@ -22,7 +22,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hdr-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:.6}
 .hdr-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
 .brand-name{font-size:12px;font-weight:500;letter-spacing:.18em;color:#e8e8e8;line-height:1;text-transform:uppercase}
-.brand-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#3a3a3a;margin-top:3px}
+.brand-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#888;margin-top:3px}
 .nav-links{display:flex;align-items:center;gap:0;position:relative;z-index:1}
 .nav-btn{font-size:12px;padding:4px 0;margin:0 18px;border:none;border-bottom:1px solid transparent;background:transparent;color:#555;cursor:pointer;transition:color .15s,border-color .15s;letter-spacing:.03em;font-weight:400}
 .nav-btn:hover{color:#d0d0d0;border-bottom-color:#3b8ade;background:transparent}
@@ -218,8 +218,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="hdr">
 <canvas class="hdr-canvas" id="hdrCanvas"></canvas>
   <div class="hdr-left">
-    <img src="charge-logo-full.png" alt="Charge Analytics" style="height:44px;width:auto;display:block;">
-    <div>
+    <img src="charge-logo-full.png" alt="Charge Analytics" style="width:90px;height:56px;object-fit:cover;object-position:top;display:block;flex-shrink:0;align-self:flex-end">
+    <div style="display:flex;flex-direction:column;justify-content:flex-end;align-self:flex-end;padding-bottom:4px">
       <div class="brand-name">Charge Analytics</div>
       <div class="brand-tag">Independent Equity Research</div>
     </div>
