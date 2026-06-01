@@ -21,6 +21,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hdr{background:#000;border-bottom:1px solid rgba(59,138,222,.35);box-shadow:0 1px 12px rgba(59,138,222,.12);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;overflow:hidden;height:64px;padding:0 2rem}
 .hdr-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:.6}
 .hdr-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.hdr-logo{width:90px;height:56px;object-fit:cover;object-position:top;display:block;flex-shrink:0;align-self:flex-end}
 .brand-name{font-size:12px;font-weight:500;letter-spacing:.18em;color:#e8e8e8;line-height:1;text-transform:uppercase}
 .brand-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#888;margin-top:3px}
 .nav-links{display:flex;align-items:center;gap:0;position:relative;z-index:1}
@@ -157,7 +158,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 @media(max-width:768px){
   .hdr{height:56px;padding:0 1.25rem}
-  .hdr-left img{height:34px!important}
+  .hdr-logo{width:72px;height:44px}
+  .brand-name{font-size:11px;letter-spacing:.14em}
+  .brand-tag{font-size:8px}
+  .nav-btn{margin:0 12px;font-size:11px}
   .rg{grid-template-columns:1fr;gap:1px}
   .footer{flex-direction:column;align-items:flex-start;gap:.75rem}
   .footer>div:last-child{text-align:left}
@@ -167,11 +171,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:600px){
   /* Header */
   .hdr{height:52px;padding:0 1rem}
-  .hdr-left img{height:30px!important}
-  .brand-name{font-size:11px}
+  .hdr-logo{width:54px;height:34px}
+  .hdr-left{gap:8px}
+  .brand-name{font-size:10px;letter-spacing:.12em}
   .brand-tag{display:none}
   .nav-links{gap:0}
-  .nav-btn{margin:0 10px;font-size:11px}
+  .nav-btn{margin:0 8px;font-size:10px}
 
   /* Hero */
   .hero{padding:2rem 1rem 1.5rem}
@@ -218,7 +223,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="hdr">
 <canvas class="hdr-canvas" id="hdrCanvas"></canvas>
   <div class="hdr-left">
-    <img src="charge-logo-full.png" alt="Charge Analytics" style="width:90px;height:56px;object-fit:cover;object-position:top;display:block;flex-shrink:0;align-self:flex-end">
+    <img src="charge-logo-full.png" alt="Charge Analytics" class="hdr-logo">
     <div style="display:flex;flex-direction:column;justify-content:flex-end;align-self:flex-end;padding-bottom:4px">
       <div class="brand-name">Charge Analytics</div>
       <div class="brand-tag">Independent Equity Research</div>
